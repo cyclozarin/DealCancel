@@ -8,6 +8,7 @@ repository = "https://thunderstore.io"
 namespace = "cyclozarin"
 name = "DealCancel"
 description = "A mod for Content Warning that allows you cancel sponsorship if something went wrong"
+websiteUrl = "https://github.com/cyclozarin/DealCancel"
 containsNsfwContent = false
 [package.dependencies]
 BepInEx-BepInExPack = "5.4.2100"
@@ -23,11 +24,11 @@ source = "../../LICENSE"
 target = "/"
 
 [[build.copy]]
-source = "../bin/Release/netstandard2.1/ExampleMod.dll"
+source = "../bin/Release/netstandard2.1/cyclozarin.contentwarning.DealCancel.dll"
 target = "/BepInEx/plugins/DealCancel/"
 
 [publish]
 communities = [ "content-warning" ]
 [publish.categories]
-content-warning = [ "mods" ]
+content-warning = [ "mods", "bepinex", "vanillacomp", "serverside" ]
 # For a list of valid tags, look at the slug values in https://thunderstore.io/api/experimental/community/content-warning/category/
