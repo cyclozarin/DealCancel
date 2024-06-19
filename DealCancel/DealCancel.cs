@@ -26,7 +26,7 @@ namespace DealCancel
         {
             Logger.LogDebug("Hooking...");
 
-            NetworkDealBossHook.Init();
+            CancelButtonHook.Init();
 
             Logger.LogDebug("Finished hooking!");
         }

@@ -6,7 +6,7 @@ using Photon.Pun;
 
 namespace DealCancel.Patches
 {
-    public class NetworkDealBossHook
+    public class CancelButtonHook
     {
         private static readonly ModalOption[] _cancelModalOptions = [
             new("<color=red>Cancel deal</color>", () => NetworkDealBoss.me.RemoveDeal(NetworkDealBoss.activeDeal)),
@@ -15,16 +15,12 @@ namespace DealCancel.Patches
 
         internal static void Init()
         {
-            On.NetworkDealBoss.RPCA_AddDeal += MMHook_Postfix_SpawnCancelButton;
+            On.SurfaceNetworkHandler.InitSurface += MMHook_Postfix_SpawnCancelButtonUponLoading;
         }
 
-        private static void MMHook_Postfix_SpawnCancelButton(On.NetworkDealBoss.orig_RPCA_AddDeal orig, NetworkDealBoss self, byte dealIndex, byte rewardIndex, DIFFICULTY difficulty)
+        private static void MMHook_Postfix_SpawnCancelButtonUponLoading(On.SurfaceNetworkHandler.orig_InitSurface orig, SurfaceNetworkHandler self)
         {
-            try // cut out possible issues when sponsorship dont have sponsor item
-            {
-                orig(self, dealIndex, rewardIndex, difficulty);
-            }
-            catch { }
+            orig(self);
             if (GameObject.Find("CancelDealButton") == null && PhotonNetwork.IsMasterClient)
             {
                 Transform _monitorCanvasTransform = GameObject.Find("NetworkDealStation/Monitor/MonitorCanvas").transform;
